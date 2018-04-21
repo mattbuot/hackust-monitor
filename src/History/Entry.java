@@ -11,17 +11,23 @@ public final class Entry {
 	private int numVisit;
 	private Date date;
 	private long visitDuration;
+	private String category;
 	
-	public Entry(String url, String title, int numVisit, Date date, long visitDuration) {
+	public Entry(String url, String title, int numVisit, Date date, long visitDuration, String category) {
 		this.url = url;
 		this.title = title;
 		this.numVisit = numVisit;
 		this.date = date;
 		this.visitDuration = visitDuration;
+		this.category = category;
 	}
 	
-	public Entry(String url, String title, int numVisit, String dateStr, int visitDuration) {
-		this(url,title,numVisit,formatDate(dateStr),visitDuration);
+	public Entry(String url, String title, int numVisit, String dateStr, int visitDuration, String category) {
+		this(url,title,numVisit,formatDate(dateStr),visitDuration, category);
+	}
+
+	public String getCategory() {
+		return category;
 	}
 	
 	public String getURL() {
@@ -45,7 +51,7 @@ public final class Entry {
 	}
 	
 	public Entry withVisitDuration(long visitDuration) {
-		return new Entry(this.url, this.title, this.numVisit, this.date, visitDuration);
+		return new Entry(this.url, this.title, this.numVisit, this.date, visitDuration, this.category);
 	}
 	
 	@Override
@@ -113,18 +119,6 @@ public final class Entry {
 		
 		return updatedHistory;
 	}
-
-	public static List<Entry> filterDates(List<Entry> history, Date begin, Date end) {
-		List<Entry> filtered = new ArrayList<>();
-
-		for(Entry e: history) {
-			if((e.getDate().compareTo(Config.start)) > 0 && (e.getDate().compareTo(Config.end)  < 0)) {
-				filtered.add(e);
-			}
-		}
-
-		return filtered;
-	}
 	
 	public static Date formatDate(String dateStr) {
 		String[] dateTime = dateStr.split(" ");
@@ -136,6 +130,15 @@ public final class Entry {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public static String findCategory(Map<String, String> categories, String url) {
+		for(String c: categories.keySet()) {
+			if(url.contains(c)) {
+				return c;
+			}
+		}
+		return null;
 	}
 }
  
