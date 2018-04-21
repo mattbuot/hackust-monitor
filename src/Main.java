@@ -1,31 +1,38 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Main {
 
-    private static final String NAVIGATION_HISTORY = "";
-
-    public static void main(String[] args) throws IOException {
-
-        System.out.println("Hello World!");
-
-        String inputPath = NAVIGATION_HISTORY;
-
-        String line;
-        BufferedReader reader = new BufferedReader(new FileReader(inputPath));
+	// ask the user to enter location
+    private static final String NAVIGATION_HISTORY = "/home/julien/.config/google-chrome/Default/History";
+    
+    public static void connect(String path) {
+        Connection conn = null;
         try {
-            line = reader.readLine();
-            while (line != null) {
-                loadLine(line);
-            }
-        } finally {
-            reader.close();
-        }
 
+            // db parameters
+            // create a connection to the database
+            conn = DriverManager.getConnection(path);
+            
+            System.out.println("Connection to SQLite has been established.");
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
-    private static void loadLine(String line) {
-
+    public static void main(String[] args) throws IOException {
+    	connect(NAVIGATION_HISTORY);
+    	
     }
 }
