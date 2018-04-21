@@ -47,7 +47,8 @@ public class Main {
             
             // loop through the result set
             while (rs.next()) {
-            	Entry nextEntry = new Entry(rs.getString("url"),rs.getString("title"),rs.getInt("visit_count"), rs.getString("last_visited"));
+            	Entry nextEntry = new Entry(rs.getString("url"),rs.getString("title"),
+                        rs.getInt("visit_count"), rs.getString("last_visited"), rs.getInt("visit_duration"));
             	entries.add(nextEntry);
             }
             return entries;

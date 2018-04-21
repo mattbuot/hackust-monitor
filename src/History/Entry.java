@@ -1,10 +1,8 @@
 package History;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public final class Entry {
 	
@@ -12,11 +10,13 @@ public final class Entry {
 	private String title;
 	private int numVisit;
 	private Date date;
+	private int visitDuration;
 	
-	public Entry(String url, String title, int numVisit, String date) {
+	public Entry(String url, String title, int numVisit, String date, int visitDuration) {
 		this.url = url;
 		this.title = title;
 		this.numVisit = numVisit;
+		this.visitDuration = visitDuration;
 		String[] dateTime = date.split(" ");
 		String dateform = dateTime[0] + "T" + dateTime[1] + "+0800";
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
@@ -38,6 +38,14 @@ public final class Entry {
 	public int getNumVisit() {
 		return numVisit;
 	}
+
+	public int getVisitDuration() {
+		return visitDuration;
+	}
+
+	public Date getDate() {
+		return date;
+	}
 	
 	@Override
 	public String toString() {
@@ -54,4 +62,23 @@ public final class Entry {
 		}
 		return filteredList;
 	}
+
+	public static double computeVisitTime(List<Entry> history, String website) {
+		Collections.sort(history, Comparator.comparing(Entry::getDate));
+		history = filterUrls(history, website);
+
+		double sum = 0;
+
+		for(int i = 0; i < history.size(); i++) {
+			int duration;
+
+			//FIRST CASE: chrome history has stored the visit duration
+			if((duration = history.get(i).getVisitDuration()) > 0) {
+				sum += (double) duration;
+			}
+		}
+
+		return sum;
+
 	}
+}
