@@ -65,25 +65,20 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
     	String historyPath = args[0];
-    	copyFiles(new File(historyPath), new File(historyPath + "2"));
-    	connect(NAVIGATION_HISTORY + historyPath + "2");
-    	List<Entry> history = fetchHistory();
-    	history = Entry.computeVisitTime(history);
-
     	BlackList.loadFile("src/blacklist.txt");
-    	System.out.println("Time spent on Facebook: " + Entry.totalVisitTime(history, "facebook.com")/1000 + "s");
-    	System.out.println("Blacklist limit: " + BlackList.limit + " length: " + (BlackList.websites.size() - 1));
-
-    	long sum = 0;
-    	for(String site: BlackList.websites) {
-    	    long time = Entry.totalVisitTime(history, site) / 1000;
-    	    System.out.println("You spent " + time + "s on " + site);
-    	    sum += time;
+    	
+    	while (true) {
+	        try {
+	        	copyFiles(new File(historyPath), new File(historyPath + "2"));
+	        	connect(NAVIGATION_HISTORY + historyPath + "2");
+	        	List<Entry> history = fetchHistory();
+	        	BlackList.checkTime(history);
+	        	Thread.currentThread().sleep(15000);
+	        } catch (InterruptedException ie) {
+	        	break;
+	        }
         }
 
-        if(sum >= BlackList.limit) {
-    	    System.out.println("Limit reached!!!!");
-        }
     	close();
     }
 }
