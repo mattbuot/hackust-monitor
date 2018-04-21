@@ -6,8 +6,16 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class URL_Util {
+    private static final String YOUTUBE_URL = "https://www.youtube.com/watch?";
 
     public static void main(String[] args) throws Exception {
+
+    }
+
+    public static String getYTCategory(String url) throws Exception{
+        if(!url.startsWith(YOUTUBE_URL)){
+            return "Not a youtube video!";
+        }
 
         URL youtube = new URL("https://www.youtube.com/watch?v=y3niFzo5VLI");
         URLConnection connection = youtube.openConnection();
@@ -17,10 +25,7 @@ public class URL_Util {
 
         String inputLine;
         String relevant = "";
-        //System.out.println("URL openned!");
-        int i = 0;
         while ((inputLine = in.readLine()) != null) {
-            i++;
 
             if(inputLine.contains("Category")) {
                 in.readLine();
@@ -35,14 +40,7 @@ public class URL_Util {
         relevant = relevant.substring(relevant.lastIndexOf(">") + 1);
         System.out.println(relevant);
         in.close();
-    }
 
-    public static String getYTCategory(String url) {
-        if(!url.startsWith("https://www.youtube.com/watch?")){
-            return "Not a youtube video!";
-        }
-        return null;
-
-
+        return relevant;
     }
 }
