@@ -86,7 +86,7 @@ public final class Entry {
 
 	public static long totalVisitTime(List<Entry> completeHistory, String website) {
 		long sum = completeHistory.stream()
-								  .filter(e -> e.getTitle().contains(website))
+								  .filter(e -> e.getURL().contains(website))
 								  .mapToLong(Entry::getVisitDuration)
 								  .sum();
 
