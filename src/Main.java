@@ -4,8 +4,10 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import History.Config;
 import History.Entry;
 
 public class Main {
@@ -68,7 +70,10 @@ public class Main {
     	copyFiles(new File(historyPath), new File(historyPath + "2"));
     	connect(NAVIGATION_HISTORY + historyPath + "2");
     	List<Entry> history = fetchHistory();
+    	Config.loadFile("src/config.txt");
+    	System.out.println("Start (ms): " + Config.start);
     	history = Entry.computeVisitTime(history);
+    	history = Entry.filterDates(history, Config.start, Config.end);
 
     	BlackList.loadFile("src/blacklist.txt");
     	System.out.println("Time spent on Facebook: " + Entry.totalVisitTime(history, "facebook.com")/1000 + "s");
