@@ -1,4 +1,7 @@
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -39,7 +42,7 @@ public class Main {
     }
     
     public static ArrayList<Entry> fetchHistory(){
-        String sql = "SELECT * FROM urls";
+        String sql = "SELECT * FROM urls ORDER BY last_visit_time DESC LIMIT 10";
         ArrayList<Entry> entries = new ArrayList<>();
         
         try (Statement stmt  = conn.createStatement();
@@ -57,11 +60,14 @@ public class Main {
         }
     }
 
+    private static void copyFiles(File source, File dest) throws IOException {
+        Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+
     public static void main(String[] args) throws IOException {
     	String historyPath = args[0];
-    	String str = NAVIGATION_HISTORY + historyPath;
-    	System.out.println(str);
-    	connect(NAVIGATION_HISTORY + historyPath);
+    	copyFiles(new File(historyPath), new File(historyPath + "2"));
+    	connect(NAVIGATION_HISTORY + historyPath + "2");
     	ArrayList<Entry> entries = fetchHistory();
     	for(Entry nextEntry: entries) {
     		System.out.println(nextEntry);
