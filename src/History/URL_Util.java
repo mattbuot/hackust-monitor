@@ -9,7 +9,7 @@ public class URL_Util {
     private static final String YOUTUBE_URL = "https://www.youtube.com/watch?";
 
     public static void main(String[] args) throws Exception {
-
+        System.out.println(getYTCategory("https://www.youtube.com/watch?v=Z_DS_jE2CNw"));
     }
 
     public static String getYTCategory(String url) throws Exception{
@@ -17,7 +17,7 @@ public class URL_Util {
             return "Not a youtube video!";
         }
 
-        URL youtube = new URL("https://www.youtube.com/watch?v=y3niFzo5VLI");
+        URL youtube = new URL(url);
         URLConnection connection = youtube.openConnection();
         connection.addRequestProperty("Accept-language", "en-US");
         BufferedReader in = new BufferedReader(
@@ -38,7 +38,7 @@ public class URL_Util {
         relevant = relevant.substring(0, relevant.lastIndexOf("</a>"));
         //System.out.println(relevant);
         relevant = relevant.substring(relevant.lastIndexOf(">") + 1);
-        System.out.println(relevant);
+        //System.out.println(relevant);
         in.close();
 
         return relevant;

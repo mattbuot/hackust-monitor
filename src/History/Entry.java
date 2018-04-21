@@ -63,21 +63,21 @@ public final class Entry {
 			//System.out.println(nextEntry.title + ", " + nextEntry.getDate());
 			if((nextEntry.getVisitDuration() == 0)) {
 				long startTime = nextEntry.getDate().getTime();
-				System.out.println("Start: " + startTime);
+				//System.out.println("Start: " + startTime);
 				long endTime;
 				if(index == (history.size()-1)) {
 					endTime = System.currentTimeMillis();
 				} else {
 					endTime = history.get(index+1).getDate().getTime();
 				}
-				System.out.println("End: " + endTime);
+				//System.out.println("End: " + endTime);
 				if(index == (history.size()-1)) {
 					endTime = System.currentTimeMillis();
 				}
 				//System.out.println("website, End - Start = " + nextEntry.getTitle() + " " + (endTime-startTime));
 				nextEntry = nextEntry.withVisitDuration(endTime-startTime);
 			} 
-			System.out.println(nextEntry.getTitle() + ", " + nextEntry.getVisitDuration());
+			//System.out.println(nextEntry.getTitle() + ", " + nextEntry.getVisitDuration());
 			updatedHistory.add(nextEntry);
 		}
 		

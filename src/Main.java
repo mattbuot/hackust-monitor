@@ -68,14 +68,22 @@ public class Main {
     	copyFiles(new File(historyPath), new File(historyPath + "2"));
     	connect(NAVIGATION_HISTORY + historyPath + "2");
     	List<Entry> history = fetchHistory();
-    	for(Entry nextEntry: history) {
-    		System.out.println(nextEntry);
-    	}
-    	System.out.println("===================================================");
-    	
     	history = Entry.computeVisitTime(history);
+
+    	BlackList.loadFile("src/blacklist.txt");
     	System.out.println("Time spent on Facebook: " + Entry.totalVisitTime(history, "facebook.com")/1000 + "s");
-    	
+    	System.out.println("Blacklist limit: " + BlackList.limit + " length: " + (BlackList.websites.size() - 1));
+
+    	long sum = 0;
+    	for(String site: BlackList.websites) {
+    	    long time = Entry.totalVisitTime(history, site) / 1000;
+    	    System.out.println("You spent " + time + "s on " + site);
+    	    sum += time;
+        }
+
+        if(sum >= BlackList.limit) {
+    	    System.out.println("Limit reached!!!!");
+        }
     	close();
     }
 }
