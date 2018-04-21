@@ -1,0 +1,40 @@
+dailymotion , entertainment_video
+
+spotify , music
+soundcloud , music
+
+airasia , travel
+jetstar , travel
+google.com/flights , travel
+expedi , travel
+
+alibaba , shopping
+amazon , shopping
+aliexpress , shopping
+ebay , shopping
+zalando , shopping 
+lazada , shopping
+
+facebook , social
+instagram , social
+weechat , social
+telegram , social
+twitter , social
+
+eurosport , sport
+skysports , sport
+
+cnn , news
+bloomberg , news
+bbc , news
+theguardian , news
+
+hsbc , bank
+ubs , bank
+jpmorgan , bank
+bochk , bank
+boc , bank
+bnpparibas , bank
+bankofamerica , bank
+dbs , bank
+creditsuisse , bank
