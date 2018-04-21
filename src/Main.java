@@ -17,7 +17,7 @@ public class Main {
         try {
             line = reader.readLine();
             while (line != null) {
-                loadLine(String line);
+                loadLine(line);
             }
         } finally {
             reader.close();
