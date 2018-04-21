@@ -6,8 +6,8 @@ import java.sql.SQLException;
 public class Main {
 
 	// ask the user to enter location
-    private static final String NAVIGATION_HISTORY = "/home/julien/.config/google-chrome/Default/History";
-    
+    private static final String NAVIGATION_HISTORY = "jdbc:sqlite:";
+
     public static void connect(String path) {
         Connection conn = null;
         try {
@@ -32,7 +32,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-    	connect(NAVIGATION_HISTORY);
+        String historyPath = args[0];
+    	connect(NAVIGATION_HISTORY + historyPath);
     	
     }
 }
