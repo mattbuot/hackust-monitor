@@ -20,7 +20,7 @@ public class Main {
             // db parameters
             // create a connection to the database
             conn = DriverManager.getConnection(path);
-            
+
             System.out.println("Connection to SQLite has been established.");
             
         } catch (SQLException e) {
