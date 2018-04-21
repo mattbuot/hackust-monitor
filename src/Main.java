@@ -2,11 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 import History.Entry;
@@ -42,7 +38,8 @@ public class Main {
     }
     
     public static ArrayList<Entry> fetchHistory(){
-        String sql = "SELECT * FROM urls ORDER BY last_visit_time DESC LIMIT 10";
+        String sql = "SELECT cast(datetime((last_visit_time + 8 * 60 * 60 * 1000 * 1000)/ 1000000 + (strftime('%s', '1601-01-01')), 'unixepoch') as VARCHAR(16)) as last_visited, " + 
+        		"  url, title, visit_count FROM urls";
         ArrayList<Entry> entries = new ArrayList<>();
         
         try (Statement stmt  = conn.createStatement();
@@ -50,7 +47,7 @@ public class Main {
             
             // loop through the result set
             while (rs.next()) {
-            	Entry nextEntry = new Entry(rs.getString("url"),rs.getString("title"),rs.getInt("visit_count"));
+            	Entry nextEntry = new Entry(rs.getString("url"),rs.getString("title"),rs.getInt("visit_count"), rs.getString("last_visited"));
             	entries.add(nextEntry);
             }
             return entries;
