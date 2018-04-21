@@ -74,7 +74,7 @@ public class Main {
     	System.out.println("===================================================");
     	
     	history = Entry.computeVisitTime(history);
-    	System.out.println("Time spent on Facebook: " + Entry.totalVisitTime(history, "Facebook")/1000 + "s");
+    	System.out.println("Time spent on Facebook: " + Entry.totalVisitTime(history, "facebook.com")/1000 + "s");
     	
     	close();
     }
