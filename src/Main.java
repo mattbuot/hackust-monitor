@@ -67,28 +67,24 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
     	String historyPath = args[0];
-    	copyFiles(new File(historyPath), new File(historyPath + "2"));
-    	connect(NAVIGATION_HISTORY + historyPath + "2");
-    	List<Entry> history = fetchHistory();
-    	Config.loadFile("src/config.txt");
-    	System.out.println("Start (ms): " + Config.start);
-    	history = Entry.computeVisitTime(history);
-    	history = Entry.filterDates(history, Config.start, Config.end);
 
     	BlackList.loadFile("src/blacklist.txt");
-    	System.out.println("Time spent on Facebook: " + Entry.totalVisitTime(history, "facebook.com")/1000 + "s");
-    	System.out.println("Blacklist limit: " + BlackList.limit + " length: " + (BlackList.websites.size() - 1));
-
-    	long sum = 0;
-    	for(String site: BlackList.websites) {
-    	    long time = Entry.totalVisitTime(history, site) / 1000;
-    	    System.out.println("You spent " + time + "s on " + site);
-    	    sum += time;
+    	
+    	while (true) {
+	        try {
+	        	copyFiles(new File(historyPath), new File(historyPath + "2"));
+	        	connect(NAVIGATION_HISTORY + historyPath + "2");
+	        	List<Entry> history = fetchHistory();
+                Config.loadFile("src/config.txt");
+                history = Entry.computeVisitTime(history);
+                history = Entry.filterDates(history, Config.start, Config.end);
+	        	BlackList.checkTime(history);
+	        	Thread.currentThread().sleep(15000);
+	        } catch (InterruptedException ie) {
+	        	break;
+	        }
+            close();
         }
 
-        if(sum >= BlackList.limit) {
-    	    System.out.println("Limit reached!!!!");
-        }
-    	close();
     }
 }
