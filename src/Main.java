@@ -72,13 +72,12 @@ public class Main {
 	        	copyFiles(new File(historyPath), new File(historyPath + "2"));
 	        	connect(NAVIGATION_HISTORY + historyPath + "2");
 	        	List<Entry> history = fetchHistory();
+	        	close();
 	        	BlackList.checkTime(history);
 	        	Thread.currentThread().sleep(15000);
 	        } catch (InterruptedException ie) {
 	        	break;
 	        }
-        }
-
-    	close();
+    	}
     }
 }
