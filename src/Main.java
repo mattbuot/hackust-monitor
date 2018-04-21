@@ -1,4 +1,7 @@
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -16,7 +19,7 @@ public class Main {
             // db parameters
             // create a connection to the database
             conn = DriverManager.getConnection(path);
-            
+
             System.out.println("Connection to SQLite has been established.");
             
         } catch (SQLException e) {
@@ -54,11 +57,14 @@ public class Main {
         }
     }
 
+    private static void copyFiles(File source, File dest) throws IOException {
+        Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+
     public static void main(String[] args) throws IOException {
     	String historyPath = args[0];
-    	String str = NAVIGATION_HISTORY + historyPath;
-    	System.out.println(str);
-    	connect(NAVIGATION_HISTORY + historyPath);
+    	copyFiles(new File(historyPath), new File(historyPath + "2"));
+    	connect(NAVIGATION_HISTORY + historyPath + "2");
     	ArrayList<Entry> entries = fetchHistory();
     	for(Entry nextEntry: entries) {
     		System.out.println(nextEntry);
