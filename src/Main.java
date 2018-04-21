@@ -39,7 +39,7 @@ public class Main {
     
     public static ArrayList<Entry> fetchHistory(){
         String sql = "SELECT cast(datetime((last_visit_time + 8 * 60 * 60 * 1000 * 1000)/ 1000000 + (strftime('%s', '1601-01-01')), 'unixepoch') as VARCHAR(16)) as last_visited, " + 
-        		"  url, title, visit_count FROM urls";
+        		"  urls.url, title, visit_count, visit_duration FROM urls INNER JOIN visits ON urls.id = visits.url";
         ArrayList<Entry> entries = new ArrayList<>();
         
         try (Statement stmt  = conn.createStatement();
@@ -47,7 +47,8 @@ public class Main {
             
             // loop through the result set
             while (rs.next()) {
-            	Entry nextEntry = new Entry(rs.getString("url"),rs.getString("title"),rs.getInt("visit_count"), rs.getString("last_visited"));
+            	Entry nextEntry = new Entry(rs.getString("url"),rs.getString("title"),
+                        rs.getInt("visit_count"), rs.getString("last_visited"), rs.getInt("visit_duration"));
             	entries.add(nextEntry);
             }
             return entries;

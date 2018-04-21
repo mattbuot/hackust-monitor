@@ -12,8 +12,10 @@ public final class Entry {
 	private String title;
 	private int numVisit;
 	private Date date;
+
+	private int visitDuration;
 	
-	public Entry(String url, String title, int numVisit, String date) {
+	public Entry(String url, String title, int numVisit, String date, int visitDuration) {
 		this.url = url;
 		this.title = title;
 		this.numVisit = numVisit;
@@ -25,6 +27,7 @@ public final class Entry {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		this.visitDuration = visitDuration;
 	}
 	
 	public String getURL() {
@@ -37,6 +40,10 @@ public final class Entry {
 	
 	public int getNumVisit() {
 		return numVisit;
+	}
+
+	public int getVisitDuration() {
+		return visitDuration;
 	}
 	
 	@Override
