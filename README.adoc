@@ -1,3 +1,6 @@
+:imagesDir: images
+:stylesDir: stylesheets
+
 = Productivity Enhancement
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
@@ -16,7 +19,7 @@ endif::[]
 
 == People
 * <<AboutUs#, About Us>>
-* <<ContactUs#, Contact Us>>
+
 
 == Acknowledgements
 
