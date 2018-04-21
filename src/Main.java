@@ -11,14 +11,15 @@ import History.Entry;
 public class Main {
 
 	// ask the user to enter location
-    private static final String NAVIGATION_HISTORY = "jdbc:sqlite:/home/julien/.config/google-chrome/Default/History";
+    private static final String NAVIGATION_HISTORY = "jdbc:sqlite:";
     private static Connection conn = null;
-    
+
     public static void connect(String path) {
         try {
+
             // db parameters
             // create a connection to the database
-            conn = DriverManager.getConnection(NAVIGATION_HISTORY);
+            conn = DriverManager.getConnection(path);
             
             System.out.println("Connection to SQLite has been established.");
             
@@ -57,7 +58,10 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-    	connect(NAVIGATION_HISTORY);
+    	String historyPath = args[0];
+    	String str = NAVIGATION_HISTORY + historyPath;
+    	System.out.println(str);
+    	connect(NAVIGATION_HISTORY + historyPath);
     	ArrayList<Entry> entries = fetchHistory();
     	for(Entry nextEntry: entries) {
     		System.out.println(nextEntry);
