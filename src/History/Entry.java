@@ -1,5 +1,8 @@
 package History;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class Entry {
 	
 	private String url;
@@ -28,4 +31,15 @@ public final class Entry {
 	public String toString() {
 		return url +  "\t" + title + "\t"+ numVisit + "\t";
 	}
-}
+
+	public static List<Entry> filterUrls(List<Entry> entries, String filter){
+		List<Entry> filteredList = new ArrayList<>();
+
+		for(Entry e: entries){
+			if(e.getURL().contains(filter)){
+				filteredList.add(e);
+			}
+		}
+		return filteredList;
+	}
+	}
