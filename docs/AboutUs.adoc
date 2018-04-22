@@ -1,0 +1,35 @@
+= About Us
+:relfileprefix: team/
+:imagesDir: images
+:stylesDir: stylesheets
+
+We area team of EPFL and NUS stuent that came together at the HACKUST in Hong Kong. This was developped in 24h as part of our aim to make progress in education.
+
+== Project Team
+
+=== Julien Heitmann
+image::julien.jpg[width="150", align="left"]
+
+{empty}[https://github.com/jheitmann[github]]
+
+
+
+'''
+
+=== Matthieu Buot de L'Epine
+image::matthieu.png[width="150", align="left"]
+{empty}[http://github.com/mattbuot[github]]
+
+'''
+
+=== Nicolas Marchal
+image::nicolas.jpg[width="150", align="left"]
+{empty}[http://github.com/nmarchal[github]]
+
+'''
+
+=== Reynard Tan
+image::reynard.jpg[width="150", align="left"]
+
+'''
+
