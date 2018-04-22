@@ -1,4 +1,5 @@
 dailymotion , entertainment_video
+youtube.com , entertainment_video
 
 spotify , music
 soundcloud , music

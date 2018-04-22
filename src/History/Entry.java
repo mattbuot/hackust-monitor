@@ -135,9 +135,15 @@ public final class Entry {
 	public static String findCategory(Map<String, String> categories, String url) {
 		for(String c: categories.keySet()) {
 			if(url.contains(c)) {
-				return c;
+				return categories.get(c);
 			}
 		}
+		/*
+		String ytCategory = URL_Util.getYTCategory(url);
+		if(ytCategory != null){
+			//if(ytCategory == '')
+			return "entertainment_video";
+		}*/
 		return null;
 	}
 }
