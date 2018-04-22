@@ -113,8 +113,20 @@ public final class Entry {
 		
 		return updatedHistory;
 	}
+
+	public static List<Entry> filterDates(List<Entry> history, Date begin, Date end) {
+		List<Entry> filtered = new ArrayList<>();
+
+		for(Entry e: history) {
+			if((e.getDate().compareTo(Config.start)) > 0 && (e.getDate().compareTo(Config.end)  < 0)) {
+				filtered.add(e);
+			}
+		}
+
+		return filtered;
+	}
 	
-	private static Date formatDate(String dateStr) {
+	public static Date formatDate(String dateStr) {
 		String[] dateTime = dateStr.split(" ");
 		String dateform = dateTime[0] + "T" + dateTime[1] + "+0800";
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");

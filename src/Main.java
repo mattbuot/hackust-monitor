@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import History.Config;
 import History.Entry;
 
 public class Main {
@@ -59,25 +60,33 @@ public class Main {
         }
     }
 
-    private static void copyFiles(File source, File dest) throws IOException {
+    public static void copyFiles(File source, File dest) throws IOException {
         Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
-    public static void main(String[] args) throws IOException {
+    @SuppressWarnings("static-access")
+	public static void main(String[] args) throws IOException {
     	String historyPath = args[0];
+
     	BlackList.loadFile("src/blacklist.txt");
+        Config.loadFile("src/config.txt");
     	
     	while (true) {
 	        try {
 	        	copyFiles(new File(historyPath), new File(historyPath + "2"));
 	        	connect(NAVIGATION_HISTORY + historyPath + "2");
+	        	
 	        	List<Entry> history = fetchHistory();
 	        	close();
+	        	
+                history = Entry.computeVisitTime(history);
+                history = Entry.filterDates(history, Config.start, Config.end);
 	        	BlackList.checkTime(history);
+	        	
 	        	Thread.currentThread().sleep(15000);
 	        } catch (InterruptedException ie) {
 	        	break;
-	        }
-    	}
+	        } 
+       }
     }
 }
