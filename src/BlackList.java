@@ -11,6 +11,7 @@ public final class BlackList {
 
     public static long limit;
     public static List<String> websites = new ArrayList<>();
+    public static long sum = 0;
 
     public static void loadFile(String path) throws IOException {
         List<String> list = new ArrayList<String>();
@@ -33,7 +34,6 @@ public final class BlackList {
     }
     
     public static void checkTime(List<Entry> history) {
-    	long sum = 0;
     	for(String site: BlackList.websites) {
     	    long time = Entry.totalVisitTime(history, site) / 1000;
     	    System.out.println("You spent " + time + "s on " + site);

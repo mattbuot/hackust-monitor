@@ -1,4 +1,5 @@
 dailymotion , entertainment_video
+youtube.com , entertainment_video
 
 spotify , music
 soundcloud , music
@@ -6,7 +7,7 @@ soundcloud , music
 airasia , travel
 jetstar , travel
 google.com/flights , travel
-expedi , travel
+expedia , travel
 
 alibaba , shopping
 amazon , shopping
@@ -24,17 +25,17 @@ twitter , social
 eurosport , sport
 skysports , sport
 
-cnn , news
+cnn.com , news
 bloomberg , news
-bbc , news
+bbc.com , news
 theguardian , news
 
-hsbc , bank
-ubs , bank
-jpmorgan , bank
-bochk , bank
-boc , bank
-bnpparibas , bank
-bankofamerica , bank
-dbs , bank
-creditsuisse , bank
+hsbc.com , bank
+ubs.com , bank
+jpmorgan.com , bank
+bochk.com , bank
+boc.com , bank
+bnpparibas.com , bank
+bankofamerica.com , bank
+dbs.com , bank
+creditsuisse.com , bank
