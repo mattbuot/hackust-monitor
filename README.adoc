@@ -13,7 +13,7 @@ ifndef::env-github[]
 endif::[]
 
 * This is a java desktop application that will help you monitor your productivity.
-* It is based on the analysis of your firefox search history
+* It is based on the analysis of your chrome search history
 * It allows the user to set his goals and helps him achieve them
 
 
